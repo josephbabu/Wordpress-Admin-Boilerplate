@@ -56,3 +56,20 @@ h2 .nav-tab {
 	-moz-transition: all .2s ease;
 	transition: all .2s ease;
 }
+
+
+/* –––– Metaboxes small screen adaptation */
+
+@media only screen and (max-width:900px){
+
+	.inner-sidebar {
+		width:100%;
+	}
+
+	.has-right-sidebar #post-body-content,
+	.has-right-sidebar #post-body,
+	.inner-sidebar #side-sortables {
+		margin-right: 0;
+		width:100%;
+	}
+}
