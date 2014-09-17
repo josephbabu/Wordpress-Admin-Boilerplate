@@ -1,4 +1,4 @@
-![Wordpress Admin Boilerplate](https://raw.githubusercontent.com/nulllogic/16girls/gh-pages/tmp/wp_admin_boilerplate.gif)
+![Wordpress Admin Boilerplate](https://raw.githubusercontent.com/nulllogic/16girls/gh-pages/assets/tmp/wp_admin_boilerplate.gif)
 
 #✝ Welcome [![Build Status](https://api.travis-ci.org/nulllogic/16Girls.svg)](https://travis-ci.org/nulllogic/16Girls)
 
