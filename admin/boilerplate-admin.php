@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @copyright 2014 NullLogic
  */
 
-class boilerplate_admin {
+class boilderplateAdmin {
 
 	protected static $instance = null;
 

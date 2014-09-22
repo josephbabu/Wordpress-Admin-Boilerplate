@@ -31,7 +31,7 @@ if( ! defined ('USE_PLUGIN_INSIDE_THEME')) {
 	if ( is_admin() ) {
 
 		require_once( plugin_dir_path( __FILE__ ) . 'admin/boilerplate-admin.php' );
-		add_action( 'plugins_loaded', array( 'boilerplate_admin', 'get_instance' ) );
+		add_action( 'plugins_loaded', array( 'boilderplateAdmin', 'get_instance' ) );
 
 	}
 
