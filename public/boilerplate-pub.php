@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package   boilerplate
  * @author    NullLogic <hello@nulllogic.net>
  * @license   MIT
- * @link      http://www.nulllab.net/development/adminboilderplate
+ * @link      http://www.nulllab.net/development/wordpress-admin-boilderplate
  * @copyright 2014 NullLogic
  */
 class boilderplate {
