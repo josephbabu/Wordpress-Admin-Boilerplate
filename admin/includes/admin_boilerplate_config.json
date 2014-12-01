@@ -1,0 +1,14 @@
+{
+  "sections" : {
+    "general" : {},
+    "advanced" : {},
+    "side"
+  },
+  "metaboxes": {
+    "general": {},
+    "advanced": {},
+    "other": {},
+    "hello": {},
+    "contact": {}
+  }
+}

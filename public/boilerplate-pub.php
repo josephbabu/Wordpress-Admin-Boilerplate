@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
+
 /**
  * Plugin Name: Admin Boilerplate
  *
