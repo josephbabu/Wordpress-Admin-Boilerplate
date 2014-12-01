@@ -6,16 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Plugin Name: Admin Boilerplate
- *
- * @package   boilerplate
- * @author    NullLogic <hello@nulllogic.net>
- * @license   MIT
- * @link      http://www.nulllab.net/development/wordpress-admin-boilderplate
- * @copyright 2014 NullLogic
+ * @package             Wordpress Admin Boilerplate
+ * @category            Public
+ * @author              NullLogic
+ * @copyright           Copyright © 2014 NullLogic
+ * @license             MIT
  */
 
-class boilderplateAdmin {
+class BoilerPlateAdmin {
 
 	protected static $instance = null;
 
@@ -25,7 +23,7 @@ class boilderplateAdmin {
 
 
 		// Get pub instance of plugin
-		$plugin = boilderplate::get_instance();
+		$plugin = BoilerPlatePub::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
 //		// Add the options page and menu item.

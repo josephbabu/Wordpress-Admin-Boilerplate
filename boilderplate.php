@@ -23,15 +23,15 @@ if( ! defined ('USE_PLUGIN_INSIDE_THEME')) {
 
 	require_once( plugin_dir_path( __FILE__ ) . 'public/boilerplate-pub.php' );
 
-	register_activation_hook( __FILE__, array( 'boilerplate', 'activate' ) );
-	register_deactivation_hook( __FILE__, array( 'boilerplate', 'deactivate' ) );
+	register_activation_hook( __FILE__, array( 'BoilerPlatePub', 'activate' ) );
+	register_deactivation_hook( __FILE__, array( 'BoilerPlatePub', 'deactivate' ) );
 
-	add_action( 'plugins_loaded', array( 'boilerplate', 'get_instance' ) );
+	add_action( 'plugins_loaded', array( 'BoilerPlatePub', 'get_instance' ) );
 
 	if ( is_admin() ) {
 
 		require_once( plugin_dir_path( __FILE__ ) . 'admin/boilerplate-admin.php' );
-		add_action( 'plugins_loaded', array( 'boilderplateAdmin', 'get_instance' ) );
+		add_action( 'plugins_loaded', array( 'BoilerPlateAdmin', 'get_instance' ) );
 
 	}
 
