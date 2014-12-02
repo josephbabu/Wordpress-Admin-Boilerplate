@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @copyright           Copyright © 2014 NullLogic
  * @license             MIT
  */
-
 class BoilerPlateAdmin {
 
 	protected static $instance = null;
@@ -23,20 +22,13 @@ class BoilerPlateAdmin {
 
 
 		// Get pub instance of plugin
-		$plugin = BoilerPlatePub::get_instance();
+		$plugin            = BoilerPlatePub::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
-//		// Add the options page and menu item.
-//		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		$this->plugin_screen_hook_suffix = 'appearance_page_' . $this->plugin_slug;
 
-		$this->plugin_screen_hook_suffix = 'appearance_page_'.$this->plugin_slug;
-
-//		// Add an action link pointing to the options page.
-		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
-		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
-
-
-		$this->register_actions();
+		$this->_register_actions();
+		$this->_register_filters();
 
 	}
 
@@ -51,16 +43,7 @@ class BoilerPlateAdmin {
 	}
 
 	public function enqueue_admin_styles() {
-
-		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-			return;
-		}
-
-		$screen = get_current_screen();
-
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/sf-admin.css', __FILE__ ), array('dashicons'), Plugin_Name::VERSION );
-		}
+		wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/sf-admin.css', __FILE__ ), array( 'dashicons' ), Plugin_Name::VERSION );
 
 	}
 
@@ -77,14 +60,11 @@ class BoilerPlateAdmin {
 	 */
 	public function enqueue_admin_scripts() {
 
-		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
-			return;
-		}
+		wp_enqueue_script( 'common' );
+		wp_enqueue_script( 'wp-lists' );
+		wp_enqueue_script( 'postbox' );
 
-		$screen = get_current_screen();
-		if ( $this->plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Plugin_Name::VERSION );
-		}
+		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Plugin_Name::VERSION );
 
 	}
 
@@ -95,20 +75,6 @@ class BoilerPlateAdmin {
 	 */
 	public function add_plugin_admin_menu() {
 
-		/*
-		 * Add a settings page for this plugin to the Settings menu.
-		 *
-		 * NOTE:  Alternative menu locations are available via WordPress administration menu functions.
-		 *
-		 *        Administration Menus: http://codex.wordpress.org/Administration_Menus
-		 *
-		 * @TODO:
-		 *
-		 * - Change 'Page Title' to the title of your plugin admin page
-		 * - Change 'Menu Text' to the text for menu item for the plugin settings page
-		 * - Change 'manage_options' to the capability you see fit
-		 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
-		 */
 		$this->plugin_screen_hook_suffix = add_options_page(
 			__( 'Page Title', $this->plugin_slug ),
 			__( 'Menu Text', $this->plugin_slug ),
@@ -119,20 +85,10 @@ class BoilerPlateAdmin {
 
 	}
 
-	/**
-	 * Render the settings page for this plugin.
-	 *
-	 * @since    1.0.0
-	 */
 	public function display_plugin_admin_page() {
 		include_once( 'views/admin.php' );
 	}
 
-	/**
-	 * Add settings action link to the plugins page.
-	 *
-	 * @since    1.0.0
-	 */
 	public function add_action_links( $links ) {
 
 		return array_merge(
@@ -144,7 +100,7 @@ class BoilerPlateAdmin {
 
 	}
 
-	private function register_actions() {
+	private function _register_actions() {
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
@@ -155,16 +111,44 @@ class BoilerPlateAdmin {
 
 	}
 
-	public function register_filters() {
+	public function _register_filters() {
+
+		if ( is_admin() ) {
+			\add_filter( 'plugin_row_meta', array( $this, '_add_custom_plugin_row_meta' ), 10, 2 );
+		}
 
 	}
 
+	public function _add_custom_plugin_row_meta( $links, $file ) {
+
+		if ( strpos( $file, $this->plugin_slug . '.php' ) !== false ) {
+			$new_links = array(
+				'<a href="#" target="_blank" title="SimpleFavicon helpdesk">Custom title for plugin</a>'
+			);
+
+			$links = array_merge( $links, $new_links );
+		}
+
+		return $links;
+	}
+
 	public function add_to_admin_theme_submenu() {
-		$page = add_theme_page( 'Favicon settings', 'Favicon', 'manage_options', 'boilerplate', array( $this, 'boilerplate_admin_page' ) );
+		$page = add_theme_page( 'Favicon settings', 'Favicon', 'manage_options', 'boilerplate', array(
+			$this,
+			'boilerplate_admin_page'
+		) );
 	}
 
 	public function boilerplate_admin_page() {
 		include_once( 'views/boilerplate-admin-view.php' );
+	}
+
+	private function _is_plugin_page() {
+		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
+			return;
+		}
+
+		$screen = get_current_screen();
 	}
 
 }

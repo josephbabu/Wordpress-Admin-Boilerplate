@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Admin Boilerplate
  * Plugin URI:        http://www.nulllab.net/development/adminboilerplate
- * Description:       Manage favicon icons for your Wordpress website easily and with pleasure
+ * Description:       WordPress admin style
  * Version:           0.0.1
  * Author:            @nulllogic
  * Author URI:        http://www.nulllogic.net/
