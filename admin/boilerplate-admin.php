@@ -43,7 +43,7 @@ class BoilerPlateAdmin {
 	}
 
 	public function enqueue_admin_styles() {
-		wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/sf-admin.css', __FILE__ ), array( 'dashicons' ), Plugin_Name::VERSION );
+		wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/sf-admin.css', __FILE__ ), array( 'dashicons' ), BoilerPlatePub::VERSION );
 
 	}
 
@@ -64,7 +64,7 @@ class BoilerPlateAdmin {
 		wp_enqueue_script( 'wp-lists' );
 		wp_enqueue_script( 'postbox' );
 
-		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Plugin_Name::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), BoilerPlatePub::VERSION );
 
 	}
 
@@ -114,22 +114,10 @@ class BoilerPlateAdmin {
 	public function _register_filters() {
 
 		if ( is_admin() ) {
-			\add_filter( 'plugin_row_meta', array( $this, '_add_custom_plugin_row_meta' ), 10, 2 );
+			\add_filter( 'plugin_row_meta', array( $this, '_add_row_plugin_meta' ), 10, 2 );
+			\add_filter( 'plugin_action_links', array( $this, '_add_row_plugin_action_links' ) );
 		}
 
-	}
-
-	public function _add_custom_plugin_row_meta( $links, $file ) {
-
-		if ( strpos( $file, $this->plugin_slug . '.php' ) !== false ) {
-			$new_links = array(
-				'<a href="#" target="_blank" title="SimpleFavicon helpdesk">Custom title for plugin</a>'
-			);
-
-			$links = array_merge( $links, $new_links );
-		}
-
-		return $links;
 	}
 
 	public function add_to_admin_theme_submenu() {
@@ -149,6 +137,31 @@ class BoilerPlateAdmin {
 		}
 
 		$screen = get_current_screen();
+	}
+
+	public function _add_row_plugin_meta( $links ) {
+		return array_merge( array(
+			'<a href="' . admin_url( 'admin.php?page=jigoshop_settings' ) . '">' . __( 'Settings', 'jigoshop' ) . '</a>'
+		), $links );
+	}
+
+	public function _add_custom_plugin_row_meta( $links, $file ) {
+
+		if ( strpos( $file, $this->plugin_slug . '.php' ) !== false ) {
+			$new_links = array(
+				'<a href="#" target="_blank" title="SimpleFavicon helpdesk">Custom title for plugin</a>'
+			);
+
+			$links = array_merge( $links, $new_links );
+		}
+
+		return $links;
+	}
+
+	public function _add_row_plugin_action_links( $links ) {
+		return array_merge( array(
+			'<a href="' . admin_url( 'admin.php?page=jigoshop_settings' ) . '">' . __( 'Settings', 'jigoshop' ) . '</a>'
+		), $links );
 	}
 
 }
