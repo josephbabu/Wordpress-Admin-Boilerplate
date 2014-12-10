@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @copyright           Copyright © 2014 NullLogic
  * @license             MIT
  */
-
 class BoilerPlatePub {
 
 	const VERSION = '0.0.1';
@@ -46,11 +45,11 @@ class BoilerPlatePub {
 		return $this->plugin_slug;
 	}
 
-	public static function activate(  ) {
+	public static function activate() {
 
 	}
 
-	public static function deactivate(  ) {
+	public static function deactivate() {
 
 
 	}

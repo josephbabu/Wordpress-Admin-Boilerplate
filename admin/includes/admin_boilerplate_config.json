@@ -1,14 +1,34 @@
 {
-  "sections" : {
-    "general" : {},
-    "advanced" : {},
-    "side" : {}
-  },
-  "metaboxes": {
-    "general": {},
-    "advanced": {},
-    "other": {},
-    "hello": {},
-    "contact": {}
-  }
+   "sections": {
+	  "general": {},
+	  "advanced": {},
+	  "side": {}
+   },
+   "metaboxes": {
+	  "smart": {
+		 "section": "general"
+	  },
+	  "general": {
+		 "section": "advanced"
+	  },
+	  "ios": {
+		 "section": "advanced"
+	  },
+	  "win": {
+		 "section": "advanced"
+	  },
+	  "other": {
+		 "section": "advanced"
+	  },
+	  "other": {},
+	  "hello": {},
+	  "contact": {}
+   },
+   "pages": {
+	  "page": {
+		 "name": "plugin-welcome",
+		 "location": "dashboard",
+		 "hide": true
+	  }
+   }
 }
