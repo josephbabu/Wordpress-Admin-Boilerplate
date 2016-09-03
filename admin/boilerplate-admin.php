@@ -29,8 +29,6 @@ class BoilerPlateAdmin {
 
 		$this->fs = $this->_init_filesystem();
 
-		$this->_get_configuration();
-
 		$this->_register_actions();
 		$this->_register_filters();
 
@@ -50,12 +48,6 @@ class BoilerPlateAdmin {
 		return $wp_filesystem;
 	}
 
-	private function _get_configuration() {
-		$config = $this->fs->get_contents( dirname( __FILE__ ) . '/includes/admin_boilerplate_config.json' );
-		if ( ! $config ) {
-			$this->set_option_helper( true, 'config_file_read_error', $this->plugin_slug . '_errors' );
-		}
-	}
 
 	public static function get_instance() {
 
@@ -150,14 +142,14 @@ class BoilerPlateAdmin {
 	public function _register_filters() {
 
 		if ( is_admin() ) {
-			\add_filter( 'plugin_row_meta', array( $this, '_add_row_plugin_meta' ), 10, 2 );
-			\add_filter( 'plugin_action_links', array( $this, '_add_row_plugin_action_links' ) );
+//			\add_filter( 'plugin_row_meta', array( $this, '_add_row_plugin_meta' ), 10, 2 );
+//			\add_filter( 'plugin_action_links', array( $this, '_add_row_plugin_action_links' ) );
 		}
 
 	}
 
 	public function add_to_admin_theme_submenu() {
-		$page = add_theme_page( 'Favicon settings', 'Favicon', 'manage_options', 'boilerplate', array(
+		$page = add_theme_page( 'WordPress Admin Templates', 'WordPress Admin Templates', 'manage_options', 'boilerplate', array(
 			$this,
 			'boilerplate_admin_page'
 		) );
