@@ -13,18 +13,20 @@
  */
 
 
+//TODO admin actions – for search purposes
+
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
 }
 
-// If you want to use this plugin inside you theme and not to list this in Wordpress plugin listing.
-if( ! defined ('USE_PLUGIN_INSIDE_THEME')) {
+// If you want to use this plugin insid   e you theme and not to list this in Wordpress plugin listing.
+if ( ! defined( 'USE_PLUGIN_INSIDE_THEME' ) ) {
 
 	require_once( plugin_dir_path( __FILE__ ) . 'public/boilerplate-pub.php' );
 
-	register_activation_hook( __FILE__, array( 'BoilerPlatePub', 'activate' ) );
-	register_deactivation_hook( __FILE__, array( 'BoilerPlatePub', 'deactivate' ) );
+	register_activation_hook( __FILE__, array( 'BoilerPlateAdmin', 'activate' ) );
+	register_deactivation_hook( __FILE__, array( 'BoilerPlateAdmin', 'deactivate' ) );
 
 	add_action( 'plugins_loaded', array( 'BoilerPlatePub', 'get_instance' ) );
 
@@ -36,7 +38,6 @@ if( ! defined ('USE_PLUGIN_INSIDE_THEME')) {
 	}
 
 } else {
-
 
 
 }
